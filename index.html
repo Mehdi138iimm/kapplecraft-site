@@ -1,41 +1,94 @@
+<!DOCTYPE html>
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
   <title>KappelCraft SMP</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <style>
     body {
-      background-color: #1e1e1e;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #1e1e1e, #2c2c2c);
       color: #f5f5f5;
-      font-family: 'Tahoma', sans-serif;
-      padding: 20px;
-      line-height: 1.8;
+      font-family: 'Press Start 2P', cursive;
+      direction: rtl;
+      overflow-x: hidden;
     }
+
+    header {
+      text-align: center;
+      padding: 50px 20px 20px;
+      animation: fadeIn 2s ease-in-out;
+    }
+
+    header img {
+      width: 120px;
+      animation: floatLogo 3s infinite ease-in-out;
+    }
+
     h1 {
       color: #ffd700;
-      text-align: center;
-    }
-    .rules {
-      background-color: #2e2e2e;
-      padding: 15px;
-      border-radius: 10px;
+      font-size: 24px;
       margin-top: 20px;
     }
+
+    section {
+      max-width: 800px;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #2e2e2e;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
+      animation: fadeInUp 1.5s ease-out;
+    }
+
+    ul {
+      padding-right: 20px;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
     .contact {
-      margin-top: 30px;
       text-align: center;
-      font-size: 1.2em;
+      margin-top: 30px;
+      font-size: 14px;
+    }
+
+    @keyframes floatLogo {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <h1>KappelCraft تقدیم می‌کند</h1>
-  <p>اس‌ام‌پی برای شما کسانی هست که دوست دارین با دوستاتون پلی بدین، لذت ببرین و از بازیتون ویدئو ضبط کنین 🎮</p>
-  <p>امروز روز بازگشت است 🌸❤️‍🔥 امروز روز شروع دوباره است 🙂</p>
-  <p>از امروز تلاش می‌کنیم تا جایی بهتر باشیم و خاطرات خوبی رو تجربه کنیم.</p>
-  <p>کپل‌کرفت فقط سروری برای سرگرمی‌ست...</p>
-  <p>سعی کنید در هرجا که هستید مسیر درستی رو پیش برید و ببینید مسیری که می‌روید درسته یا نه.</p>
 
-  <div class="rules">
+  <header>
+    <img src="../Pictures/a Minecraft-inspired.png" alt="KappelCraft Logo">
+    <h1>KappelCraft تقدیم می‌کند</h1>
+  </header>
+
+  <section>
+    <p>اس‌ام‌پی برای شما کسانی هست که دوست دارین با دوستاتون پلی بدین، لذت ببرین و از بازیتون ویدئو ضبط کنین 🎮</p>
+    <p>امروز روز بازگشت است 🌸❤️‍🔥 امروز روز شروع دوباره است 🙂</p>
+    <p>از امروز تلاش می‌کنیم تا جایی بهتر باشیم و خاطرات خوبی رو تجربه کنیم.</p>
+    <p>کپل‌کرفت فقط سروری برای سرگرمی‌ست...</p>
+    <p>سعی کنید در هرجا که هستید مسیر درستی رو پیش برید و ببینید مسیری که می‌روید درسته یا نه.</p>
+  </section>
+
+  <section>
     <h2>📜 شرایط ورود به SMP:</h2>
     <ul>
       <li>۱. اسم و سنتون ★</li>
@@ -44,12 +97,13 @@
       <li>۴. خصوصیات اخلاقی‌تون ☆</li>
       <li>۵. گرفتن ویدیو از سرور در آپارات یا یوتیوب: اجباری/اختیاری</li>
     </ul>
-  </div>
+  </section>
 
-  <div class="contact">
-    <p>برای ثبت‌نام به این PV پیام بدین:</p>
+  <section class="contact">
+    <p>برای ثبت‌نام به این PV تلگرام پیام بدین:</p>
     <p>Mr_yellow: @Mehdi138p</p>
     <p>Tanjiro: @TANJIRO_GG</p>
-  </div>
+  </section>
+
 </body>
 </html>
