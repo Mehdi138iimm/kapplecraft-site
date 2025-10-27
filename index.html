@@ -160,6 +160,23 @@ table td {
 table tr:hover {
   background-color: rgba(255, 215, 0, 0.1);
 }
+.hover-motion {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: inline-block;
+}
+
+.hover-motion:hover {
+  transform: translateY(-5px) scale(1.03);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
+.motion-row {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.motion-row:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
+}
   </style>
 </head>
 <body onload="playSound()">
@@ -179,7 +196,7 @@ table tr:hover {
   <center>
   <section>
     <p>اس‌ ام‌ پی برای شما کسانی هست که دوست دارین با دوستاتون پلی بدین، لذت ببرین و از بازیتون ویدئو ضبط کنین.</p>
-	<p> 🎮سروری برای گوشی پلیر ها و پجاولانچر پلیر ها</p>
+	<p class="hover-motion"> 🎮سروری برای گوشی پلیر ها و پجاولانچر پلیر ها</p>
     <p>امروز روز بازگشت است 🌸❤️‍🔥 امروز روز شروع دوباره است 🙂</p>
     <p>از امروز تلاش می‌کنیم تا جایی بهتر باشیم و خاطرات خوبی رو تجربه کنیم.</p>
     <p>کاپل‌کرفت فقط سروری برای سرگرمی‌ست...</p>
@@ -187,31 +204,32 @@ table tr:hover {
   </section>
 </center>
 <center>
-	<section>
-  <h2>🧰 اطلاعات فنی سرور KappelCraft</h2>
-  <table style="width:100%; background-color: rgba(255,255,255,0.1); border-collapse: collapse; border-radius: 10px;">
-    <tr>
-      <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🎮 آی‌پی سرور</td>
-      <td style="padding: 10px; border-bottom: 1px solid #ffd700;">kapplecraft.tgmc.ir</td>
-    </tr>
-    <tr>
-      <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🧠 رم سرور</td>
-      <td style="padding: 10px; border-bottom: 1px solid #ffd700;">4GB</td>
-    </tr>
-    <tr>
-      <td style="padding: 10px; border-bottom: 1px solid #ffd700;">💾 حافظه</td>
-      <td style="padding: 10px; border-bottom: 1px solid #ffd700;">SSD 10GB</td>
-    </tr>
-    <tr>
-      <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🌐 نسخه Minecraft</td>
-      <td style="padding: 10px; border-bottom: 1px solid #ffd700;">1.20.1</td>
-    </tr>
-    <tr>
-      <td style="padding: 10px;">👥 تعداد پلیر همزمان</td>
-      <td style="padding: 10px;">تا 50 نفر</td>
-    </tr>
-  </table>
-</section>
+  <section>
+    <h2>🧰 اطلاعات فنی سرور KappelCraft</h2>
+    <table style="width:100%; background-color: rgba(255,255,255,0.1); border-collapse: collapse; border-radius: 10px;">
+      <tr class="motion-row">
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🎮 آی‌پی سرور</td>
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">kapplecraft.tgmc.ir</td>
+      </tr>
+      <tr class="motion-row">
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🧠 رم سرور</td>
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">4GB</td>
+      </tr>
+      <tr class="motion-row">
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">💾 حافظه</td>
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">SSD 10GB</td>
+      </tr>
+      <tr class="motion-row">
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🌐 نسخه Minecraft</td>
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">1.20.1</td>
+      </tr>
+      <tr class="motion-row">
+        <td style="padding: 10px;">👥 تعداد پلیر همزمان</td>
+        <td style="padding: 10px;">تا 50 نفر</td>
+      </tr>
+    </table>
+  </section>
+</center>
   <section>
   <h2>📝 فرم ثبت‌نام SMP</h2>
   <form action="https://formspree.io/f/xblpdoqa" method="POST">
