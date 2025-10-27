@@ -181,7 +181,7 @@ table tr:hover {
 </head>
 <body onload="playSound()">
 
-  <audio id="introSound" src="https://uupload.ir/view/minecraft-cave-ambient-sound-effect_ztyb.mp3/" preload="auto"></audio>
+  <audio id="introSound" src="Minecraft-Cave-Ambient-Sound-Effect.mp3" preload="auto"></audio>
 
   <script>
     function playSound() {
@@ -208,9 +208,15 @@ table tr:hover {
     <h2>🧰 اطلاعات فنی سرور KappelCraft</h2>
     <table style="width:100%; background-color: rgba(255,255,255,0.1); border-collapse: collapse; border-radius: 10px;">
       <tr class="motion-row">
-        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🎮 آی‌پی سرور</td>
+        <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🎮 آی‌پی سرور برای کپی شدن کلیک کنید</td>
         <td style="padding: 10px; border-bottom: 1px solid #ffd700;">kapplecraft.tgmc.ir</td>
       </tr>
+	<td style="padding: 10px; border-bottom: 1px solid #ffd700;">
+  <span id="server-ip" onclick="copyIP()" style="cursor: pointer; color: #ffd700; text-decoration: underline;">
+    kapplecraft.tgmc.ir
+  </span>
+  <span id="copy-msg" style="display:none; color: lightgreen; font-size: 12px; margin-right: 10px;">کپی شد ✅</span>
+</td>
       <tr class="motion-row">
         <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🧠 رم سرور</td>
         <td style="padding: 10px; border-bottom: 1px solid #ffd700;">4GB</td>
@@ -231,6 +237,7 @@ table tr:hover {
   </section>
 </center>
   <section>
+<center>
   <h2>📝 فرم ثبت‌نام SMP</h2>
   <form action="https://formspree.io/f/xblpdoqa" method="POST">
     <label>نام و نام خانوادگی:</label><br>
@@ -266,5 +273,25 @@ table tr:hover {
   <p>🛠️ طراحی و توسعه سایت توسط: <strong>Mehdi</strong> | KappelCraft © 2025</p>
   <p>📬 ارتباط با ادمین: <a href="https://t.me/Mehdi138p" target="_blank" style="color: #ffd700;">@Mehdi138p</a></p>
 </footer>
+<script>
+  function copyIP() {
+    const ip = "kapplecraft.tgmc.ir";
+    navigator.clipboard.writeText(ip).then(() => {
+      // نمایش پیام
+      const msg = document.getElementById("copy-msg");
+      msg.style.display = "inline";
+
+      // پخش صدا
+      const sound = document.getElementById("copySound");
+      sound.play();
+
+      // مخفی کردن پیام بعد از ۲ ثانیه
+      setTimeout(() => {
+        msg.style.display = "none";
+      }, 2000);
+    });
+  }
+</script>
+<audio id="copySound" src="Minecraft-Pickaxe-QuickSounds.com_.mp3" preload="auto"></audio>
 </body>
 </html>
