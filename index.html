@@ -177,6 +177,45 @@ table tr:hover {
   transform: translateY(-4px) scale(1.02);
   box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3);
 }
+body.yellow-theme {
+  background-color: rgba(255, 255, 200, 0.85); /* زرد گرم و ملایم */
+  color: #222;
+}
+
+body.yellow-theme section {
+  background-color: rgba(255, 255, 200, 0.85); /* زرد روشن با شفافیت */
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+  color: #222;
+}
+
+body.yellow-theme h1,
+body.yellow-theme h2 {
+  color: #cc8800;
+}
+
+body.yellow-theme .signup-btn,
+body.yellow-theme button {
+  background-color: #ffcc00;
+  color: #000;
+}
+
+body.yellow-theme input,
+body.yellow-theme textarea,
+body.yellow-theme select {
+  background-color: #fffbe6;
+  color: #222;
+}
+
+body.yellow-theme footer {
+  background-color: #fff0b3;
+  color: #333;
+  border-top: 2px solid #ffcc00;
+}
+
+body.yellow-theme table td {
+  background-color: rgba(255, 255, 255, 0.6);
+  color: #222;
+}
   </style>
 </head>
 <body onload="playSound()">
@@ -192,6 +231,11 @@ table tr:hover {
   <header>
     <img src="https://s6.uupload.ir/files/a_minecraft-inspired_2pe0.png" alt="KappelCraft Logo">
     <h1>KappelCraft</h1>
+	  <center>
+		  <button onclick="toggleTheme()" id="themeToggle" style="margin-top: 20px; padding: 8px 16px; font-size: 12px; border-radius: 8px; background-color: #ffd700; color: #000; border: none; cursor: pointer;">
+  تغییر تم 🎨
+</button>
+	  </center>
   </header>
   <center>
   <section>
@@ -293,5 +337,18 @@ table tr:hover {
   }
 </script>
 <audio id="copySound" src="Minecraft-Pickaxe-QuickSounds.com_.mp3" preload="auto"></audio>
+<script>
+  function toggleTheme() {
+    const body = document.body;
+    const btn = document.getElementById("themeToggle");
+    body.classList.toggle("yellow-theme");
+
+    if (body.classList.contains("yellow-theme")) {
+      btn.textContent = "تم دارک 🎮";
+    } else {
+      btn.textContent = "تغییر تم 🎨";
+    }
+  }
+</script>
 </body>
 </html>
