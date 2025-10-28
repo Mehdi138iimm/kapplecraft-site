@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>KappelCraft SMP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
   <style>
     body {
@@ -561,6 +562,58 @@ body.yellow-theme table td {
 }
 	  h1, h2, h3, nav, footer {
   font-family: 'Lalezar', cursive;
+}
+	  body {
+  font-family: 'Lalezar', cursive;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (max-width: 768px) {
+  .news-section,
+  #register-form,
+  #player-list,
+  #admin-add {
+    padding: 20px;
+    font-size: 15px;
+  }
+
+  input, button {
+    font-size: 14px;
+  }
+
+  nav a {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .ad-box {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    top: auto;
+    bottom: 20px;
+    font-size: 14px;
+  }
+
+  .close-btn {
+    top: 5px;
+    right: 5px;
+  }
+}
+	  .ad-box {
+  width: 240px; /* دسکتاپ */
+}
+
+@media screen and (max-width: 768px) {
+  .ad-box {
+    width: 90%; /* موبایل */
+    left: 5%;
+    right: 5%;
+    bottom: 20px;
+    top: auto;
+  }
 }
 </style>
 </head>
