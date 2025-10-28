@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>KappelCraft SMP</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lalezar&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
@@ -391,7 +391,178 @@ body.yellow-theme table td {
   cursor: pointer;
   font-size: 12px;
 }
-  </style>
+	  #minecraft-news h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#minecraft-news h3 {
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+#minecraft-news p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+	  .news-section {
+  background-color: #111;
+  color: #ccc;
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 40px;
+  overflow: hidden;
+}
+
+.news-section h2 {
+  color: #ffd700;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.news-slider {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  animation: slideNews 30s linear infinite;
+}
+
+.news-item {
+  background-color: rgba(255, 255, 255, 0.05);
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
+}
+
+.news-item h3 {
+  color: #00ffcc;
+  font-size: 18px;
+  margin-bottom: 8px;
+}
+
+.news-item p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+@keyframes slideNews {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-100%); }
+}
+	  .news-section {
+  background-color: #111;
+  color: #ccc;
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 40px;
+  text-align: center;
+}
+
+#news-container {
+  margin-top: 20px;
+  min-height: 120px;
+  transition: opacity 0.5s ease-in-out;
+}
+	  .news-section {
+  background-color: #111;
+  color: #ccc;
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 40px;
+}
+
+.news-section h2 {
+  color: #ffd700;
+  text-align: center;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#news-container .news-item {
+  background-color: rgba(255,255,255,0.05);
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(255,215,0,0.2);
+}
+	  .news-section {
+  background-color: #111;
+  color: #ccc;
+  padding: 30px;
+  border-radius: 15px;
+  margin-top: 40px;
+  text-align: center;
+  font-family: "Vazirmatn", sans-serif;
+}
+
+.news-section h2 {
+  color: #ffd700;
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+#news-container {
+  min-height: 120px;
+  transition: opacity 0.5s ease-in-out;
+  direction: rtl;
+}
+  html {
+    scroll-behavior: smooth;
+  }
+.ad-box {
+  position: fixed;
+  top: 100px;
+  width: 240px;
+  background: linear-gradient(135deg, rgba(40,40,40,0.85), rgba(20,20,20,0.85)); /* 👈 جایگزین این خط با قبلی */
+  color: #ffd700;
+  padding: 15px 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  backdrop-filter: blur(6px);
+  font-size: 13px;
+  z-index: 9999;
+  animation: floatAd 6s infinite ease-in-out;
+  transition: all 0.3s ease;
+}
+}
+
+.right-ad {
+  right: 20px;
+}
+
+.left-ad {
+  left: 20px;
+}
+
+.ad-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 16px;
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  cursor: pointer;
+}
+
+@keyframes floatAd {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+	  body {
+  font-family: 'Lalezar', cursive;
+}
+	  h1, h2, h3, nav, footer {
+  font-family: 'Lalezar', cursive;
+}
+</style>
 </head>
 <body onload="playSound()">
 
@@ -405,7 +576,9 @@ body.yellow-theme table td {
 
   <header>
     <img src="https://s6.uupload.ir/files/a_minecraft-inspired_2pe0.png" alt="KappelCraft Logo">
-    <h1>KappelCraft</h1>
+	  <center>
+    <h1 class="hover-motion">KappelCraft</h1>
+		  </center>
 	  <center>
 		  <button onclick="toggleTheme()" id="themeToggle" style="margin-top: 20px; padding: 8px 16px; font-size: 12px; border-radius: 8px; background-color: #ffd700; color: #000; border: none; cursor: pointer;">
   تغییر تم 🎨
@@ -424,7 +597,7 @@ body.yellow-theme table td {
 </center>
 <center>
   <section>
-    <h2>🧰 اطلاعات فنی سرور KappelCraft</h2>
+    <h2 class="hover-motion">🧰 اطلاعات فنی سرور KappelCraft</h2>
     <table style="width:100%; background-color: rgba(255,255,255,0.1); border-collapse: collapse; border-radius: 10px;">
       <tr class="motion-row">
         <td style="padding: 10px; border-bottom: 1px solid #ffd700;">🎮 آی‌پی سرور برای کپی شدن کلیک کنید</td>
@@ -457,7 +630,7 @@ body.yellow-theme table td {
 </center>
   <section>
 <center>
-  <h2>📝 فرم ثبت‌نام SMP</h2>
+  <h2 class="hover-motion">📝 فرم ثبت‌نام SMP</h2>
   <form action="https://formspree.io/f/xblpdoqa" method="POST">
     <label>نام و نام خانوادگی:</label><br>
     <input type="text" name="name_age" required><br><br>
@@ -486,6 +659,23 @@ body.yellow-theme table td {
     <button type="submit">ارسال فرم</button>
   </form>
 </center>
+</section>
+	<section id="admin-add" style="background-color: #222; color: #ccc; padding: 30px; margin-top: 40px; border-radius: 15px;">
+  <h2 style="color: #ffd700;">🔐 افزودن پلیر توسط ادمین</h2>
+  <form id="adminForm">
+    <input type="password" id="adminCode" placeholder="رمز ادمین" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: none;">
+    <input type="text" id="playerName" placeholder="نام پلیر" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: none;">
+    <button type="submit" style="background-color: #ffd700; color: #000; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;">افزودن</button>
+  </form>
+  <p id="adminError" style="color: #ff4444; margin-top: 10px;"></p>
+</section>
+	<section id="player-list" style="background-color: #111; color: #ccc; padding: 30px; margin-top: 20px; border-radius: 15px;">
+  <h2 style="color: #ffd700;">👑 دیوار افتخار پلیرهای ثبت‌شده</h2>
+  <ol id="playerNames" style="padding-right: 20px;"></ol>
+</section>
+	<section id="minecraft-news" class="news-section">
+  <h2 class="hover-motion">📰 آخرین اخبار ماینکرفت</h2>
+  <div id="news-container"></div>
 </section>
 <footer style="background-color: rgba(0,0,0,0.8); color: #ccc; text-align: center; padding: 20px; font-size: 12px; margin-top: 40px;">
   <p>👑 سازنده سرور: <strong>Sir_Mr_yellow138</strong></p>
@@ -574,5 +764,117 @@ body.yellow-theme table td {
   <div id="messages">
     <!-- پیام‌ها اینجا نمایش داده می‌شن -->
   </div>
+		<script>
+let newsItems = [];
+let currentIndex = 0;
+const container = document.getElementById("news-container");
+
+function showNews(index) {
+  container.style.opacity = 0;
+  setTimeout(() => {
+    const item = newsItems[index];
+    container.innerHTML = `
+      <h3 style="color:#ffd700;">${item.title}</h3>
+      <p>${item.content}</p>
+      <a href="${item.link}" target="_blank" style="color:#00ffcc;">مشاهده کامل خبر</a>
+    `;
+    container.style.opacity = 1;
+  }, 500);
+}
+
+fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.minecraft.net/en-us/feeds/community-content/rss")
+  .then(response => response.json())
+  .then(data => {
+    newsItems = data.items.slice(0, 5).map(item => ({
+      title: item.title,
+      content: item.description.slice(0, 150) + "...",
+      link: item.link
+    }));
+
+    showNews(currentIndex);
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % newsItems.length;
+      showNews(currentIndex);
+    }, 6000);
+  });
+</script>
+		<script>
+const adminForm = document.getElementById("adminForm");
+const adminCodeInput = document.getElementById("adminCode");
+const playerNameInput = document.getElementById("playerName");
+const playerList = document.getElementById("playerNames");
+const adminError = document.getElementById("adminError");
+
+// رمز ادمین (فقط تو بدونی!)
+const ADMIN_SECRET = "8752";
+
+// بارگذاری لیست از LocalStorage
+let players = JSON.parse(localStorage.getItem("kappelPlayers")) || [];
+
+function renderList() {
+  playerList.innerHTML = "";
+  players.forEach((name, index) => {
+    const li = document.createElement("li");
+    li.innerHTML = `
+      ${index + 1}. ${name}
+      <button onclick="deletePlayer('${name}')" style="margin-right:10px; background:#ff4444; color:#fff; border:none; border-radius:5px; padding:2px 6px; cursor:pointer;">حذف</button>
+    `;
+    li.style.color = "#00ffcc";
+    li.style.marginBottom = "5px";
+    playerList.appendChild(li);
+  });
+}
+
+function deletePlayer(name) {
+  const code = prompt("برای حذف، رمز ادمین را وارد کنید:");
+  if (code !== ADMIN_SECRET) {
+    alert("❌ رمز اشتباه است!");
+    return;
+  }
+  players = players.filter(p => p !== name);
+  localStorage.setItem("kappelPlayers", JSON.stringify(players));
+  renderList();
+}
+
+renderList();
+
+adminForm.addEventListener("submit", function(e) {
+  e.preventDefault();
+  const code = adminCodeInput.value.trim();
+  const name = playerNameInput.value.trim();
+
+  if (code !== ADMIN_SECRET) {
+    adminError.textContent = "❌ رمز ادمین اشتباه است!";
+    return;
+  }
+
+  if (players.includes(name)) {
+    adminError.textContent = "⚠️ این پلیر قبلاً ثبت شده!";
+    return;
+  }
+
+  players.push(name);
+  localStorage.setItem("kappelPlayers", JSON.stringify(players));
+  playerNameInput.value = "";
+  adminCodeInput.value = "";
+  adminError.textContent = "";
+  renderList();
+});
+</script>
+		<!-- تبلیغ سمت راست -->
+<div class="ad-box right-ad" id="rightAd">
+  <button class="close-btn" onclick="document.getElementById('rightAd').style.display='none'">✖</button>
+  <a href="http://localhost/YellowShop1/order.php" target="_blank" style="text-decoration: none; color: inherit;">
+    <p>🎁 <strong>سفارش محصول</strong> تخفیف خورده بدوو جدید! 👈 کلیک کن</p>
+  </a>
+</div>
+
+<!-- تبلیغ سمت چپ -->
+<div class="ad-box left-ad" id="leftAd">
+  <button class="close-btn" onclick="document.getElementById('leftAd').style.display='none'">✖</button>
+  <a href="http://localhost/YellowShop1/index.php" target="_blank" style="text-decoration: none; color: inherit;">
+    <p>🛒 <strong>فروشگاه YellowShop</strong> | آیتم‌های کمیاب Minecraft با تخفیف ویژه!</p>
+  </a>
+</div>
 </body>
 </html>
