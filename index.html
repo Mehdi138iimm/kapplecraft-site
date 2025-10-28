@@ -615,17 +615,123 @@ body.yellow-theme table td {
     top: auto;
   }
 }
-body {
-  background-image: url("https://s6.uupload.ir/files/loop_bunny_gif_by_xbox_dphu.gif");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-position: center;
+	  .cape-holo {
+  position: fixed;
+  bottom: 20px;
+  width: 220px;
+  background: linear-gradient(135deg, rgba(40,40,40,0.85), rgba(20,20,20,0.85));
+  color: #ffd700;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+  backdrop-filter: blur(6px);
+  font-size: 13px;
+  z-index: 9999;
+  animation: floatAd 6s infinite ease-in-out;
+  transition: all 0.3s ease;
+  text-align: center;
 }
-	  @media screen and (max-width: 768px) {
-  body {
-    background-image: url("https://s6.uupload.ir/files/loop_bunny_gif_by_xbox_dphu.gif");
+
+.right-cape {
+  right: 20px;
+}
+
+.left-cape {
+  left: 20px;
+}
+
+.cape-img {
+  width: 100px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(255,255,255,0.3);
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: #ff4444;
+  font-size: 16px;
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  cursor: pointer;
+}
+
+@keyframes floatAd {
+  0% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0); }
+}
+
+@media screen and (max-width: 768px) {
+  .cape-holo {
+    width: 90%;
+    left: 5%;
+    right: 5%;
+    bottom: 10px;
+    font-size: 14px;
   }
+}
+	  #blockRain {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.block {
+  position: absolute;
+  width: 32px;
+  height: 32px;
+  background-size: cover;
+  animation: fall linear;
+}
+
+@keyframes fall {
+  0% { transform: translateY(-50px); opacity: 1; }
+  100% { transform: translateY(100vh); opacity: 0; }
+}
+	  #draggableClock {
+  position: fixed;
+  top: 100px;
+  left: 100px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, #222, #000);
+  border: 3px solid #ffd700;
+  border-radius: 50%;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Lalezar', cursive;
+  font-size: 18px;
+  color: #ffd700;
+  cursor: grab;
+  user-select: none;
+  z-index: 9999;
+  animation: rotateClock 10s linear infinite;
+  text-align: center;
+}
+
+#clockTitle {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+#clockDisplay {
+  font-size: 24px;
+  transform: rotate(-360deg); /* خنثی کردن چرخش متن */
+}
+
+@keyframes rotateClock {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 </style>
 </head>
@@ -777,6 +883,10 @@ body {
     }
   }
 </script>
+<div id="draggableClock">
+  <div id="clockTitle">🕒 ساعت</div>
+  <div id="clockDisplay">00:00</div>
+</div>
 <div id="cursor-circle"></div>
 <script>
   const cursor = document.getElementById("cursor-circle");
@@ -784,6 +894,39 @@ body {
   document.addEventListener("mousemove", (e) => {
     cursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
   });
+</script>
+	<script>
+function updateClock() {
+  const now = new Date();
+  const h = now.getHours().toString().padStart(2, '0');
+  const m = now.getMinutes().toString().padStart(2, '0');
+  document.getElementById("clockDisplay").textContent = `${h}:${m}`;
+}
+setInterval(updateClock, 1000);
+updateClock();
+
+// قابلیت Drag
+const clock = document.getElementById("draggableClock");
+let isDragging = false, offsetX, offsetY;
+
+clock.addEventListener("mousedown", function(e) {
+  isDragging = true;
+  offsetX = e.clientX - clock.offsetLeft;
+  offsetY = e.clientY - clock.offsetTop;
+  clock.style.cursor = "grabbing";
+});
+
+document.addEventListener("mousemove", function(e) {
+  if (isDragging) {
+    clock.style.left = (e.clientX - offsetX) + "px";
+    clock.style.top = (e.clientY - offsetY) + "px";
+  }
+});
+
+document.addEventListener("mouseup", function() {
+  isDragging = false;
+  clock.style.cursor = "grab";
+});
 </script>
 	<div id="support-btn" onclick="toggleSupport()">
   🛠️
@@ -805,6 +948,7 @@ body {
     document.getElementById("support-panel").style.display = "none";
   }
 </script>
+<div id="blockRain"></div>
 <div id="support-panel">
   <h3>📩 ارسال تیکت به پشتیبانی</h3>
   <form action="https://formspree.io/f/xpwoqyqa" method="POST" id="support-form">
@@ -913,6 +1057,33 @@ adminForm.addEventListener("submit", function(e) {
   renderList();
 });
 </script>
+	<script>
+const blockRain = document.getElementById("blockRain");
+
+// لیست تصاویر بلوک‌ها (می‌تونی هر عکس دلخواه بذاری)
+const blockImages = [
+  "https://s6.uupload.ir/files/150px-lime_concrete_gdio.png",
+  "https://s6.uupload.ir/files/jack_o_39_lantern_(s)_je4_y7be.png",
+  "https://s6.uupload.ir/files/honey_block_je1_be2_803p.png",
+  "https://s6.uupload.ir/files/block_of_gold_je6_be3_jye8.png",
+  "https://s6.uupload.ir/files/150px-block_of_iron_je4_be3_rwrz.png",
+  "https://s6.uupload.ir/files/block_of_netherite_je1_be1_5mzp.png",
+  "https://s6.uupload.ir/files/block_of_diamond_je5_be3_px1.png",
+];
+
+function spawnBlock() {
+  const block = document.createElement("div");
+  block.className = "block";
+  block.style.left = Math.random() * window.innerWidth + "px";
+  block.style.animationDuration = (3 + Math.random() * 3) + "s";
+  block.style.backgroundImage = `url('${blockImages[Math.floor(Math.random() * blockImages.length)]}')`;
+  blockRain.appendChild(block);
+
+  setTimeout(() => block.remove(), 6000);
+}
+
+setInterval(spawnBlock, 300);
+</script>
 		<!-- تبلیغ سمت راست -->
 <div class="ad-box right-ad" id="rightAd">
   <button class="close-btn" onclick="document.getElementById('rightAd').style.display='none'">✖</button>
@@ -928,5 +1099,19 @@ adminForm.addEventListener("submit", function(e) {
     <p>🛒 <strong>فروشگاه YellowShop</strong> | آیتم‌های کمیاب Minecraft با تخفیف ویژه!</p>
   </a>
 </div>
+		<!-- هولوگرام سمت راست -->
+<div class="cape-holo right-cape" id="capeRight">
+  <button class="close-btn" onclick="document.getElementById('capeRight').style.display='none'">✖</button>
+  <img src="https://s6.uupload.ir/files/{2e2c34ff-5e91-473f-b0b1-ffe9298c8ddf}_w3o9.png" alt="Copper Cape" class="cape-img">
+  <p><strong>🧱 Copper Cape</strong><br>با ساخت 75 میلیون گولم مسی فعال شد!</p>
+</div>
+
+<!-- هولوگرام سمت چپ -->
+<div class="cape-holo left-cape" id="capeLeft">
+  <button class="close-btn" onclick="document.getElementById('capeLeft').style.display='none'">✖</button>
+  <img src="https://s6.uupload.ir/files/{22afd601-e241-4004-9f2e-b825ea7ee29b}_jlp8.png" alt="Menace Cape" class="cape-img">
+  <p><strong>🎬 Menace Cape</strong><br>کیپ مخصوص فیلم Minecraft Movie</p>
+</div>
+
 </body>
 </html>
