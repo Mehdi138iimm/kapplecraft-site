@@ -615,6 +615,18 @@ body.yellow-theme table td {
     top: auto;
   }
 }
+body {
+  background-image: url("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExajFwNjR4bGJ6em82dXA3eWxoOXZhZHg3N2I3OGFxOTV3NGJwMXkycCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/v63B5WpbX0a03HAVRV/giphy.gif");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
+	  @media screen and (max-width: 768px) {
+  body {
+    background-image: url("https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExajFwNjR4bGJ6em82dXA3eWxoOXZhZHg3N2I3OGFxOTV3NGJwMXkycCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/v63B5WpbX0a03HAVRV/giphy.gif");
+  }
+}
 </style>
 </head>
 <body onload="playSound()">
@@ -712,19 +724,6 @@ body.yellow-theme table td {
     <button type="submit">ارسال فرم</button>
   </form>
 </center>
-</section>
-	<section id="admin-add" style="background-color: #222; color: #ccc; padding: 30px; margin-top: 40px; border-radius: 15px;">
-  <h2 style="color: #ffd700;">🔐 وایت لیست شدن پلیر توسط ادمین یا اونر</h2>
-  <form id="adminForm">
-    <input type="password" id="adminCode" placeholder="رمز ادمین" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: none;">
-    <input type="text" id="playerName" placeholder="نام پلیر" required style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 8px; border: none;">
-    <button type="submit" style="background-color: #ffd700; color: #000; padding: 10px 20px; border: none; border-radius: 8px; cursor: pointer;">افزودن</button>
-  </form>
-  <p id="adminError" style="color: #ff4444; margin-top: 10px;"></p>
-</section>
-	<section id="player-list" style="background-color: #111; color: #ccc; padding: 30px; margin-top: 20px; border-radius: 15px;">
-  <h2 style="color: #ffd700;">👑 پلیر های وایت لیست شده</h2>
-  <ol id="playerNames" style="padding-right: 20px;"></ol>
 </section>
 	<section id="minecraft-news" class="news-section">
   <h2 class="hover-motion">📰 آخرین اخبار ماینکرفت</h2>
