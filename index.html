@@ -699,8 +699,8 @@ body.yellow-theme table td {
   position: fixed;
   top: 100px;
   left: 100px;
-  width: 140px;
-  height: 140px;
+  width: 130px;
+  height: 130px;
   background: radial-gradient(circle, #222, #000);
   border: 3px solid #ffd700;
   border-radius: 50%;
@@ -717,6 +717,7 @@ body.yellow-theme table td {
   z-index: 9999;
   animation: rotateClock 10s linear infinite;
   text-align: center;
+  touch-action: none; /* برای جلوگیری از اسکرول هنگام درگ */
 }
 
 #clockTitle {
@@ -905,28 +906,44 @@ function updateClock() {
 setInterval(updateClock, 1000);
 updateClock();
 
-// قابلیت Drag
+// قابلیت Drag با موس و لمس
 const clock = document.getElementById("draggableClock");
-let isDragging = false, offsetX, offsetY;
+let isDragging = false, offsetX = 0, offsetY = 0;
 
-clock.addEventListener("mousedown", function(e) {
+function startDrag(x, y) {
   isDragging = true;
-  offsetX = e.clientX - clock.offsetLeft;
-  offsetY = e.clientY - clock.offsetTop;
+  offsetX = x - clock.offsetLeft;
+  offsetY = y - clock.offsetTop;
   clock.style.cursor = "grabbing";
-});
+}
 
-document.addEventListener("mousemove", function(e) {
+function moveDrag(x, y) {
   if (isDragging) {
-    clock.style.left = (e.clientX - offsetX) + "px";
-    clock.style.top = (e.clientY - offsetY) + "px";
+    clock.style.left = (x - offsetX) + "px";
+    clock.style.top = (y - offsetY) + "px";
   }
-});
+}
 
-document.addEventListener("mouseup", function() {
+function endDrag() {
   isDragging = false;
   clock.style.cursor = "grab";
+}
+
+// موس
+clock.addEventListener("mousedown", e => startDrag(e.clientX, e.clientY));
+document.addEventListener("mousemove", e => moveDrag(e.clientX, e.clientY));
+document.addEventListener("mouseup", endDrag);
+
+// لمس
+clock.addEventListener("touchstart", e => {
+  const touch = e.touches[0];
+  startDrag(touch.clientX, touch.clientY);
 });
+document.addEventListener("touchmove", e => {
+  const touch = e.touches[0];
+  moveDrag(touch.clientX, touch.clientY);
+});
+document.addEventListener("touchend", endDrag);
 </script>
 	<div id="support-btn" onclick="toggleSupport()">
   🛠️
