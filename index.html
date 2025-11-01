@@ -1,4 +1,3 @@
-<!DOCTYPE html>
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
@@ -695,44 +694,66 @@ body.yellow-theme table td {
   0% { transform: translateY(-50px); opacity: 1; }
   100% { transform: translateY(100vh); opacity: 0; }
 }
-	  #draggableClock {
-  position: fixed;
-  top: 100px;
-  left: 100px;
-  width: 130px;
-  height: 130px;
-  background: radial-gradient(circle, #222, #000);
-  border: 3px solid #ffd700;
-  border-radius: 50%;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+	 #serverStatusBox {
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 12px;
+  background: #1a1a1a;
+  border: 2px solid #00ffcc;
+  border-radius: 12px;
+  padding: 10px 20px;
   font-family: 'Lalezar', cursive;
   font-size: 18px;
-  color: #ffd700;
-  cursor: grab;
-  user-select: none;
-  z-index: 9999;
-  animation: rotateClock 10s linear infinite;
-  text-align: center;
-  touch-action: none; /* برای جلوگیری از اسکرول هنگام درگ */
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+  width: fit-content;
+  margin: 30px auto;
 }
 
-#clockTitle {
-  font-size: 16px;
-  margin-bottom: 5px;
+.status-icon {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: gray;
+  box-shadow: 0 0 5px gray;
+  animation: pulse 1.5s infinite;
 }
 
-#clockDisplay {
-  font-size: 24px;
-  transform: rotate(-360deg); /* خنثی کردن چرخش متن */
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.6; }
+}
+	 #playerCountBox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: #222;
+  border: 2px solid #00ffcc;
+  border-radius: 12px;
+  padding: 10px 20px;
+  font-family: 'Lalezar', cursive;
+  font-size: 18px;
+  color: #fff;
+  box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
+  width: fit-content;
+  margin: 30px auto;
 }
 
-@keyframes rotateClock {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+.player-icon {
+  width: 20px;
+  height: 20px;
+  background-image: url("https://s6.uupload.ir/files/sir_mr_yellow138_vzge_face_kgjw.png"); /* آیکون پلیر */
+  background-size: cover;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(1); opacity: 0.6; }
 }
 </style>
 </head>
@@ -756,6 +777,14 @@ body.yellow-theme table td {
   تغییر تم 🎨
 </button>
 	  </center>
+	  <div id="serverStatusBox">
+  <div class="status-icon"></div>
+  <div class="status-text">در حال بررسی وضعیت سرور...</div>
+</div>
+	<div id="playerCountBox">
+  <div class="player-icon"></div>
+  <div class="player-text">در حال دریافت اطلاعات...</div>
+</div>
   </header>
   <center>
   <section>
@@ -851,6 +880,25 @@ body.yellow-theme table td {
     <li>🛡️ <strong>Tanjero</strong> – <a href="https://discord.com/users/1122334455" target="_blank" style="color: #7289da;">دیسکورد</a></li>
   </ul>
 </footer>
+	<script>
+const playerText = document.querySelector(".player-text");
+
+fetch("https://api.mcsrvstat.us/3/piglin.9craft.ir:17441")
+  .then(res => res.json())
+  .then(data => {
+    if (data.online) {
+      const online = data.players.online;
+      const max = data.players.max;
+      playerText.textContent = `🟢 ${online} پلیر آنلاین از ${max}`;
+    } else {
+      playerText.textContent = "🔴 سرور آفلاین است";
+    }
+  })
+  .catch(err => {
+    playerText.textContent = "⚠️ خطا در دریافت اطلاعات";
+    console.error(err);
+  });
+</script>
 <script>
   function copyIP() {
     const ip = "kapplecraft.tgmc.ir";
@@ -884,10 +932,6 @@ body.yellow-theme table td {
     }
   }
 </script>
-<div id="draggableClock">
-  <div id="clockTitle">🕒 ساعت</div>
-  <div id="clockDisplay">00:00</div>
-</div>
 <div id="cursor-circle"></div>
 <script>
   const cursor = document.getElementById("cursor-circle");
@@ -897,53 +941,33 @@ body.yellow-theme table td {
   });
 </script>
 	<script>
-function updateClock() {
-  const now = new Date();
-  const h = now.getHours().toString().padStart(2, '0');
-  const m = now.getMinutes().toString().padStart(2, '0');
-  document.getElementById("clockDisplay").textContent = `${h}:${m}`;
-}
-setInterval(updateClock, 1000);
-updateClock();
+const statusIcon = document.querySelector(".status-icon");
+const statusText = document.querySelector(".status-text");
 
-// قابلیت Drag با موس و لمس
-const clock = document.getElementById("draggableClock");
-let isDragging = false, offsetX = 0, offsetY = 0;
+// آدرس IP یا دامنه سرور Minecraft
+const serverIP = "piglin.9craft.ir:17441";
 
-function startDrag(x, y) {
-  isDragging = true;
-  offsetX = x - clock.offsetLeft;
-  offsetY = y - clock.offsetTop;
-  clock.style.cursor = "grabbing";
-}
-
-function moveDrag(x, y) {
-  if (isDragging) {
-    clock.style.left = (x - offsetX) + "px";
-    clock.style.top = (y - offsetY) + "px";
-  }
-}
-
-function endDrag() {
-  isDragging = false;
-  clock.style.cursor = "grab";
-}
-
-// موس
-clock.addEventListener("mousedown", e => startDrag(e.clientX, e.clientY));
-document.addEventListener("mousemove", e => moveDrag(e.clientX, e.clientY));
-document.addEventListener("mouseup", endDrag);
-
-// لمس
-clock.addEventListener("touchstart", e => {
-  const touch = e.touches[0];
-  startDrag(touch.clientX, touch.clientY);
-});
-document.addEventListener("touchmove", e => {
-  const touch = e.touches[0];
-  moveDrag(touch.clientX, touch.clientY);
-});
-document.addEventListener("touchend", endDrag);
+// دریافت اطلاعات از API
+fetch("https://api.mcsrvstat.us/3/piglin.9craft.ir:17441")
+  .then(res => res.json())
+  .then(data => {
+    if (data.online) {
+      const online = data.players.online;
+      const max = data.players.max;
+      statusIcon.style.backgroundColor = "#00ff00";
+      statusIcon.style.boxShadow = "0 0 10px #00ff00";
+      statusText.textContent = `✅ سرور آنلاین است`;
+    } else {
+      statusIcon.style.backgroundColor = "#ff0000";
+      statusIcon.style.boxShadow = "0 0 10px #ff0000";
+      statusText.textContent = "❌ سرور آفلاین است";
+    }
+  })
+  .catch(err => {
+    statusIcon.style.backgroundColor = "gray";
+    statusText.textContent = "⚠️ خطا در دریافت اطلاعات";
+    console.error(err);
+  });
 </script>
 	<div id="support-btn" onclick="toggleSupport()">
   🛠️
@@ -1011,69 +1035,6 @@ fetch("https://api.rss2json.com/v1/api.json?rss_url=https://www.minecraft.net/en
     }, 6000);
   });
 </script>
-		<script>
-const adminForm = document.getElementById("adminForm");
-const adminCodeInput = document.getElementById("adminCode");
-const playerNameInput = document.getElementById("playerName");
-const playerList = document.getElementById("playerNames");
-const adminError = document.getElementById("adminError");
-
-// رمز ادمین (فقط تو بدونی!)
-const ADMIN_SECRET = "8752";
-
-// بارگذاری لیست از LocalStorage
-let players = JSON.parse(localStorage.getItem("kappelPlayers")) || [];
-
-function renderList() {
-  playerList.innerHTML = "";
-  players.forEach((name, index) => {
-    const li = document.createElement("li");
-    li.innerHTML = `
-      ${index + 1}. ${name}
-      <button onclick="deletePlayer('${name}')" style="margin-right:10px; background:#ff4444; color:#fff; border:none; border-radius:5px; padding:2px 6px; cursor:pointer;">حذف</button>
-    `;
-    li.style.color = "#00ffcc";
-    li.style.marginBottom = "5px";
-    playerList.appendChild(li);
-  });
-}
-
-function deletePlayer(name) {
-  const code = prompt("برای حذف، رمز ادمین را وارد کنید:");
-  if (code !== ADMIN_SECRET) {
-    alert("❌ رمز اشتباه است!");
-    return;
-  }
-  players = players.filter(p => p !== name);
-  localStorage.setItem("kappelPlayers", JSON.stringify(players));
-  renderList();
-}
-
-renderList();
-
-adminForm.addEventListener("submit", function(e) {
-  e.preventDefault();
-  const code = adminCodeInput.value.trim();
-  const name = playerNameInput.value.trim();
-
-  if (code !== ADMIN_SECRET) {
-    adminError.textContent = "❌ رمز ادمین اشتباه است!";
-    return;
-  }
-
-  if (players.includes(name)) {
-    adminError.textContent = "⚠️ این پلیر قبلاً ثبت شده!";
-    return;
-  }
-
-  players.push(name);
-  localStorage.setItem("kappelPlayers", JSON.stringify(players));
-  playerNameInput.value = "";
-  adminCodeInput.value = "";
-  adminError.textContent = "";
-  renderList();
-});
-</script>
 	<script>
 const blockRain = document.getElementById("blockRain");
 
@@ -1101,34 +1062,18 @@ function spawnBlock() {
 
 setInterval(spawnBlock, 300);
 </script>
-		<!-- تبلیغ سمت راست -->
-<div class="ad-box right-ad" id="rightAd">
-  <button class="close-btn" onclick="document.getElementById('rightAd').style.display='none'">✖</button>
-  <a href="http://localhost/YellowShop1/order.php" target="_blank" style="text-decoration: none; color: inherit;">
-    <p>🎁 <strong>سفارش محصول</strong> تخفیف خورده بدوو جدید! 👈 کلیک کن</p>
-  </a>
-</div>
-
-<!-- تبلیغ سمت چپ -->
-<div class="ad-box left-ad" id="leftAd">
-  <button class="close-btn" onclick="document.getElementById('leftAd').style.display='none'">✖</button>
-  <a href="http://localhost/YellowShop1/index.php" target="_blank" style="text-decoration: none; color: inherit;">
-    <p>🛒 <strong>فروشگاه YellowShop</strong> | آیتم‌های کمیاب Minecraft با تخفیف ویژه!</p>
-  </a>
-</div>
 		<!-- هولوگرام سمت راست -->
 <div class="cape-holo right-cape" id="capeRight">
   <button class="close-btn" onclick="document.getElementById('capeRight').style.display='none'">✖</button>
-  <img src="https://s6.uupload.ir/files/{2e2c34ff-5e91-473f-b0b1-ffe9298c8ddf}_w3o9.png" alt="Copper Cape" class="cape-img">
-  <p><strong>🧱 Copper Cape</strong><br>با ساخت 75 میلیون گولم مسی فعال شد!</p>
+  <img src="https://s6.uupload.ir/files/8b8071267c74cba94801496a1fca1c103385d294_3enm.png" alt="Copper Cape" class="cape-img">
+  <p><strong>🦾RankUp,Levelup</strong><br>رنک آپ کردن و اسکیل باز کردن!</p>
 </div>
 
 <!-- هولوگرام سمت چپ -->
 <div class="cape-holo left-cape" id="capeLeft">
   <button class="close-btn" onclick="document.getElementById('capeLeft').style.display='none'">✖</button>
-  <img src="https://s6.uupload.ir/files/{22afd601-e241-4004-9f2e-b825ea7ee29b}_jlp8.png" alt="Menace Cape" class="cape-img">
-  <p><strong>🎬 Menace Cape</strong><br>کیپ مخصوص فیلم Minecraft Movie</p>
+  <img src="https://cdn.modrinth.com/data/cached_images/963f2175d1833d7f6da6d1b67c526e6c29b710d1.png" alt="Menace Cape" class="cape-img">
+  <p><strong>✨Accessory</strong><br>اکسسوری و قدرت های آن</p>
 </div>
-
 </body>
 </html>
