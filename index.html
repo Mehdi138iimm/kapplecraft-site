@@ -1,3 +1,4 @@
+
 <html lang="fa">
 <head>
   <meta charset="UTF-8">
@@ -905,6 +906,67 @@ a:hover, .btn:hover {
   border-left: 4px solid #ff6600;
   border-radius: 6px;
 }
+	 .slider-section {
+  text-align: center;
+  margin: 50px auto;
+  max-width: 800px;
+  padding: 20px;
+  background-color: #111;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(255, 102, 0, 0.4);
+  color: #ffcc00;
+  font-family: 'Lalezar', cursive;
+}
+
+.slider-section h2 {
+  margin-bottom: 20px;
+  font-size: 28px;
+  text-shadow: 0 0 10px #ff6600;
+}
+
+.slider {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  display: none;
+  border-radius: 12px;
+}
+
+.slide.active {
+  display: block;
+}
+
+.slider button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ff6600;
+  color: #000;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 18px;
+  box-shadow: 0 0 10px #ff6600;
+  z-index: 10;
+}
+
+.slider .prev {
+  left: 10px;
+}
+
+.slider .next {
+  right: 10px;
+}
 </style>
 </head>
 <body onload="playSound()">
@@ -946,6 +1008,25 @@ a:hover, .btn:hover {
     <p>کاپل‌کرفت فقط سروری برای سرگرمی‌ست...</p>
     <p>سعی کنید در هرجا که هستید مسیر درستی رو پیش برید و ببینید مسیری که می‌روید درسته یا نه.</p>
   </section>
+	 <section class="slider-section">
+  <h2>📸 پریویو KappleCraft</h2>
+  <div class="slider">
+    <button class="prev" onclick="prevSlide()">←</button>
+    <div class="slides">
+      <img src="https://s6.uupload.ir/files/2025-11-02_00.28.11_md0a.png" class="slide active" alt="Preview 1">
+      <img src="https://s6.uupload.ir/files/2025-11-02_00.29.37_arfi.png" class="slide" alt="Preview 2">
+      <img src="https://s6.uupload.ir/files/2025-11-02_00.30.01_uy03.png" class="slide" alt="Preview 3">
+	  <img src="https://s6.uupload.ir/files/2025-11-02_00.34.43_v37v.png" class="slide" alt="Preview 4">
+	  <img src="https://s6.uupload.ir/files/2025-11-02_00.37.49_hic4.png" class="slide" alt="Preview 5">
+	  <img src="https://s6.uupload.ir/files/2025-11-02_00.41.20_ves.png" class="slide" alt="Preview 6">
+		<img src="https://s6.uupload.ir/files/2025-11-02_00.41.53_5ra.png" class="slide" alt="Preview 7">
+		<img src="https://s6.uupload.ir/files/2025-11-02_00.42.00_d4rm.png" class="slide" alt="Preview 8">
+		<img src="https://s6.uupload.ir/files/2025-11-02_00.42.06_61vq.png" class="slide" alt="Preview 9">
+		<img src="https://s6.uupload.ir/files/2025-11-02_00.42.18_2pix.png" class="slide" alt="Preview 10">
+    </div>
+    <button class="next" onclick="nextSlide()">→</button>
+  </div>
+</section>
 <div class="halloween-banner spooky-glow">
   🎃 رویداد هالووین بزودی</div>
 </center>
@@ -1103,6 +1184,29 @@ fetch("https://api.mcsrvstat.us/3/piglin.9craft.ir:17441")
     console.error(err);
   });
 </script>
+	<script>
+	let currentSlide = 0;
+const slides = document.querySelectorAll(".slide");
+
+function showSlide(index) {
+  slides.forEach((slide, i) => {
+    slide.classList.toggle("active", i === index);
+  });
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+function prevSlide() {
+  currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+  showSlide(currentSlide);
+}
+
+// نمایش اسلاید اول هنگام بارگذاری
+showSlide(currentSlide);
+	</script>
 <script>
   function copyIP() {
     const ip = "kapplecraft.tgmc.ir";
