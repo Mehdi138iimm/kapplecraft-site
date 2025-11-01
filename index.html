@@ -11,7 +11,7 @@
       padding: 0;
       font-family: 'Press Start 2P', cursive;
       direction: rtl;
-      background-image: url("https://s6.uupload.ir/files/download_vhhj.jpg"); /* Minecraft background */
+      background-image: url("https://s6.uupload.ir/files/minecraft-halloween-pumpkin-carving-desktop-wallpaper-4k_huki.jpg"); /* Minecraft background */
       background-size: cover;
       background-position: center;
       background-attachment: fixed;
@@ -856,6 +856,55 @@ a:hover, .btn:hover {
   from { text-shadow: 0 0 5px #ff6600; }
   to { text-shadow: 0 0 20px #ff6600; }
 }
+	  .halloween-banner {
+  background: linear-gradient(to right, #330000, #660000);
+  color: #ffcc00;
+  padding: 15px;
+  text-align: center;
+  font-size: 22px;
+  border-top: 2px solid #ff6600;
+  border-bottom: 2px solid #ff6600;
+}
+
+.spooky-glow {
+  animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 5px #ff6600; }
+  to { text-shadow: 0 0 20px #ff6600; }
+}
+
+#halloweenEvent, #halloweenShop {
+  background: #1a1a1a;
+  border: 2px solid #ff6600;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 30px auto;
+  max-width: 700px;
+  box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
+  color: #fff;
+  font-family: 'Lalezar', cursive;
+}
+
+#halloweenEvent h2, #halloweenShop h2 {
+  color: #ff6600;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+#halloweenEvent ul {
+  list-style: none;
+  padding: 0;
+}
+
+#halloweenEvent li, .shop-item {
+  background: #2a2a2a;
+  padding: 10px;
+  margin-bottom: 8px;
+  border-left: 4px solid #ff6600;
+  border-radius: 6px;
+}
 </style>
 </head>
 <body onload="playSound()">
@@ -878,6 +927,7 @@ a:hover, .btn:hover {
   تغییر تم 🎨
 </button>
 	  </center>
+	  <div class="floating-bats"></div>
 	  <div id="serverStatusBox">
   <div class="status-icon"></div>
   <div class="status-text">در حال بررسی وضعیت سرور...</div>
@@ -896,6 +946,8 @@ a:hover, .btn:hover {
     <p>کاپل‌کرفت فقط سروری برای سرگرمی‌ست...</p>
     <p>سعی کنید در هرجا که هستید مسیر درستی رو پیش برید و ببینید مسیری که می‌روید درسته یا نه.</p>
   </section>
+<div class="halloween-banner spooky-glow">
+  🎃 رویداد هالووین بزودی</div>
 </center>
 <section id="commandsSection">
   <h2>📜 لیست کامندهای قابل استفاده در KappleCraft</h2>
@@ -954,6 +1006,21 @@ a:hover, .btn:hover {
   </table>
 </section>
 </center>
+	<section id="halloweenEvent">
+  <h2>🎃 رویداد ویژه هالووین</h2>
+  <ul>
+    <li>🎁 مأموریت‌های ترسناک با جوایز خاص</li>
+    <li>🧟 منطقه ویژه: <code>بزودی</code></li>
+    <li>🕒 شمارنده معکوس تا پایان رویداد</li>
+    <li>🛒 آیتم‌های هالووینی در فروشگاه</li>
+  </ul>
+</section>
+	<section id="halloweenShop">
+  <h2>🛒 آیتم‌های ترسناک ویژه هالووین</h2>
+  <div class="shop-item spooky-glow">🧙 بزودی</div>
+  <div class="shop-item spooky-glow">🧟 بزودی</div>
+  <div class="shop-item spooky-glow">🎃 بزودی</div>
+</section>
   <section>
 <center>
   <h2 class="hover-motion">📝 فرم ثبت‌نام SMP</h2>
